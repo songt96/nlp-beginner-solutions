@@ -1,0 +1,10 @@
+{
+    "level": "char",
+    "vocab_size": 5024,
+    "embedding_path": "/home/songt/data/embedding/merge_sgns_bigram_char300.txt",
+    "embedding_dim": 300,
+    "static_emb": true,
+    "dropout": 0.5,
+    "hidden_size": 300,
+    "num_labels": 2
+}

@@ -73,7 +73,7 @@ def read_csv(file_path, quotechar='"', delimiter=','):
         return lines
 
 
-class TextPairInputExample():
+class TextPairExample():
     def __init__(self, text_a, text_b, label=None):
         self.text_a = text_a
         self.text_b = text_b
@@ -87,7 +87,7 @@ def create_lcqmc_examples(lines):
         text_a = line[0]
         text_b = line[1]
         label = line[2]
-        examples.append(TextPairInputExample(text_a, text_b, label))
+        examples.append(TextPairExample(text_a, text_b, label))
     return examples
 
 
@@ -117,14 +117,15 @@ class LcqmcProcessor():
         return label2id
 
 
-class TextPairInputFeature():
+class TextPairFeature():
     def __init__(self, ids_a, ids_b, label_id):
         self.ids_a = ids_a
         self.ids_b = ids_b
         self.label_id = label_id
 
 
-def examples_to_features(examples, label2id, tokenizer, max_len=48, preprocess_fn=preprocess_lcqmc, verbose=True):
+def examples_to_features(examples, label2id, tokenizer, max_len=48,
+                         preprocess_fn=preprocess_lcqmc, verbose=True):
 
     features = []
     len_a, len_b = [], []
@@ -148,9 +149,6 @@ def examples_to_features(examples, label2id, tokenizer, max_len=48, preprocess_f
         ids_a = ids_a[:max_len]
         ids_b = ids_b[:max_len]
         label_id = label2id.get(example.label)
-        # if lens_a[idx] > 30 or lens_b[idx] > 30:
-        #     print(tokens_a)
-        #     print(tokens_b)
         if idx < 3 and verbose:
             logger.info('*** Example ***')
             logger.info('tokens_a: {}'.format(str(tokens_a)))
@@ -159,7 +157,7 @@ def examples_to_features(examples, label2id, tokenizer, max_len=48, preprocess_f
             logger.info('ids_b: {}'.format(str(ids_b)))
             logger.info('label: {} (id = {})'.format(
                 example.label, label_id))
-        features.append(TextPairInputFeature(ids_a, ids_b, label_id))
+        features.append(TextPairFeature(ids_a, ids_b, label_id))
     logger.info('A: mean: {}, std: {}, max: {}, min: {}'.format(
         np.mean(len_a), np.std(len_a), max(len_a), min(len_a)))
     logger.info('B: mean: {}, std: {}, max: {}, min: {}\n'.format(

@@ -1,0 +1,7 @@
+{
+    "vocab_size": 4834,
+    "embedding_dim": 300,
+    "hidden_size": 300,
+    "num_labels": 8,
+    "dropout": 0.5
+}

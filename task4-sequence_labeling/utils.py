@@ -59,7 +59,7 @@ class TokenClfExample():
         self.token_labels = token_labels
 
 
-class TokenClfFeatures():
+class TokenClfFeature():
     def __init__(self, token_ids, token_label_ids):
         self.token_ids = token_ids
         self.token_label_ids = token_label_ids
@@ -105,7 +105,7 @@ def examples_to_features(examples, tokenizer, label2id, max_len=64):
 
         token_ids = token_ids[:max_len]
         token_label_ids = token_label_ids[:max_len]
-        features.append(TokenClfFeatures(token_ids, token_label_ids))
+        features.append(TokenClfFeature(token_ids, token_label_ids))
         if idx < 3:
             logger.info('*** Example ***')
             logger.info('tokens: {}'.format(str(tokens)))

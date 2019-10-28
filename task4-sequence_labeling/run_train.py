@@ -3,11 +3,11 @@ import logging
 import argparse
 import numpy as np
 import torch
-import torch.nn as nn
 from torch.utils.data import DataLoader
 import utils
 import models
 import trainer
+
 os.environ['CUDA_VISIBLE_DEVICES'] = '3'
 logger = logging.getLogger(__name__)
 logging.basicConfig(format='%(asctime)s - %(levelname)s - %(name)s - %(message)s',
@@ -51,12 +51,12 @@ if __name__ == "__main__":
     label2idx = processor.get_label2id()
 
     tokenizer = utils.Tokenizer(args.model_dir)
-    train_features = utils.examples_to_features(
+    train_features = utils.examples_to_ids(
         train_examples, tokenizer, label2idx, args.max_len)
     all_label = []
     (all_label.extend(f.token_label_ids) for f in train_features)
     logger.info(np.bincount(all_label))
-    dev_features = utils.examples_to_features(
+    dev_features = utils.examples_to_ids(
         dev_examples, tokenizer, label2idx, args.max_len)
 
     train_dataloader = DataLoader(utils.MyDataset(train_features),

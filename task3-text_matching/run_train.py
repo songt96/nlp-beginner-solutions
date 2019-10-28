@@ -62,10 +62,10 @@ if __name__ == "__main__":
     if args.do_train:
         train_examples = processor.get_train_examples()
         dev_examples = processor.get_dev_examples()
-        train_features = utils.examples_to_features(
+        train_features = utils.examples_to_ids(
             train_examples, label2id, tokenizer,
             max_len=args.max_len, verbose=True)
-        dev_features = utils.examples_to_features(
+        dev_features = utils.examples_to_ids(
             dev_examples, label2id, tokenizer,
             max_len=args.max_len, verbose=True)
         train_dataloader = DataLoader(utils.MyDataset(train_features),

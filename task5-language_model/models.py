@@ -3,9 +3,9 @@ import torch.nn as nn
 import torch.nn.functional as F
 
 
-class LstmLM(nn.Module):
+class LSTMLM(nn.Module):
     def __init__(self, config, embedding=None):
-        super(LstmLM, self).__init__()
+        super(LSTMLM, self).__init__()
         self.vocab_size = config.vocab_size
         self.embedding = nn.Sequential(
             nn.Embedding(self.vocab_size, config.embedding_dim,

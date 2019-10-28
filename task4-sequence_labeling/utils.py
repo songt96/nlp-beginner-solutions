@@ -146,7 +146,7 @@ class TokenClfCollate():
 
 
 # tokenizer utils
-class Tokenizer():
+class CharTokenizer():
     def __init__(self, model_dir):
         f_path = os.path.join(model_dir, 'vocab.json')
         with open(f_path, 'r', encoding='utf8') as f:
@@ -228,5 +228,5 @@ if __name__ == "__main__":
     train_sentences, train_labels = read_token_clf_data('data/msra/train.txt')
     test_sentences, test_labels = read_token_clf_data('data/msra/test.txt')
     all_sentences = train_sentences + test_sentences
-    Tokenizer.build_vocab(all_sentences, output_dir='experiments/bilstm')
+    CharTokenizer.build_vocab(all_sentences, output_dir='experiments/bilstm')
     pass
